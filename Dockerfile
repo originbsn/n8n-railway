@@ -1,4 +1,6 @@
 FROM n8nio/n8n:latest
 USER root
-RUN mkdir -p /data/.n8n && chmod -R 777 /data
-USER node
+RUN apk add --no-cache su-exec
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
